@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import br.com.petz.beans.ClienteBean;
 import br.com.petz.dto.ClienteDTO;
+import br.com.petz.exception.ClienteAssociadoException;
 import br.com.petz.responses.Response;
 import br.com.petz.services.ClienteService;
 import javassist.NotFoundException;
@@ -62,7 +63,16 @@ public class ClienteController {
 
 	@DeleteMapping("/remover/{id}")
 	public ResponseEntity<?> removerUsuario(@PathVariable(name = "id") int id) {
-		this.service.removerCliente(id);
+		try {
+			this.service.removerCliente(id);
+		} catch (NotFoundException e) {
+
+			return ResponseEntity.notFound().build();
+
+		} catch (ClienteAssociadoException e) {
+
+			return ResponseEntity.badRequest().body("Cliente possui Pets cadastrados, é necessário excluir os Pets antes da exclusão do cliente");
+		}
 		return ResponseEntity.noContent().build();
 	}
 

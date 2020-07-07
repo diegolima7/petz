@@ -1,8 +1,11 @@
 package br.com.petz.dto;
 
+import java.util.List;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
+import br.com.petz.beans.PetBean;
 import br.com.petz.enums.SexoCliente;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -14,6 +17,8 @@ public class ClienteDTO {
 	private String telefone;
 	private SexoCliente sexo;
 	private String endereco;
+	@ApiModelProperty(hidden = true)
+	private List<PetBean> pets;
 
 	public ClienteDTO() {
 	}
@@ -80,6 +85,14 @@ public class ClienteDTO {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+
+	public List<PetBean> getPets() {
+		return pets;
+	}
+
+	public void setPets(List<PetBean> pets) {
+		this.pets = pets;
 	}
 	
 }

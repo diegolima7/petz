@@ -1,14 +1,14 @@
 package br.com.petz.services;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.petz.beans.ClienteBean;
 import br.com.petz.beans.PetBean;
 import br.com.petz.dto.PetDTO;
+import br.com.petz.repositories.ClienteRepository;
 import br.com.petz.repositories.PetRepository;
 import javassist.NotFoundException;
 
@@ -17,7 +17,7 @@ public class PetService {
 
 	@Autowired
 	private PetRepository petRepository;
-
+	
 	private ModelMapper model = new ModelMapper();
 
 	public PetBean cadastrarPet(PetBean pet) {
@@ -41,5 +41,11 @@ public class PetService {
 	public PetBean buscaPetPorId(Integer id) throws NotFoundException {
 		return this.petRepository.findById(id).orElseThrow(() -> new NotFoundException("Pet não encontrado"));
 	}
+	
+//	public PetBean buscarPetsPorCliente(int idCliente) {
+//		
+//		return petRepository.findByCliente(clienteRepository.findById(idCliente));
+//				
+//	}
 
 }

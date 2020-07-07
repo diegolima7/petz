@@ -29,6 +29,8 @@ public class ClienteBean implements Serializable{
 	private String telefone;
 	private SexoCliente sexo;
 	private String endereco;
+	@OneToMany(mappedBy = "cliente")
+	private List<PetBean> pets; 
 
 	public int getIdCliente() {
 		return idCliente;
@@ -85,5 +87,13 @@ public class ClienteBean implements Serializable{
 	public void setSexo(SexoCliente sexo) {
 		this.sexo = sexo;
 	}
-	
+
+	public List<PetBean> getPets() {
+		return pets;
+	}
+
+	public void setPets(List<PetBean> pets) {
+		this.pets = pets;
+	}
+		
 }

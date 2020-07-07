@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.petz.beans.ClienteBean;
 import br.com.petz.dto.ClienteDTO;
+import br.com.petz.exception.ClienteAssociadoException;
 import br.com.petz.repositories.ClienteRepository;
 import javassist.NotFoundException;
 
@@ -14,7 +15,7 @@ public class ClienteService {
 
 	@Autowired
 	private ClienteRepository clienteRepository;
-	
+
 	private ModelMapper model = new ModelMapper();
 
 	public ClienteBean cadastrarCliente(ClienteDTO dto) {
@@ -29,8 +30,15 @@ public class ClienteService {
 		return this.clienteRepository.save(cliente);
 	}
 
-	public void removerCliente(Integer id) {
-		this.clienteRepository.deleteById(id);
+	public void removerCliente(Integer id) throws NotFoundException, ClienteAssociadoException{
+
+		ClienteBean cliente = this.buscaClientePorId(id);
+
+		if(cliente.getPets().isEmpty()) {
+			this.clienteRepository.deleteById(id);		
+		}else {
+			throw new ClienteAssociadoException();
+		}	
 	}
 
 	public ClienteBean buscaClientePorId(Integer id) throws NotFoundException {
