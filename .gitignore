@@ -32,3 +32,8 @@ build/
 
 ### Properties ###
 application-local.properties
+
+### MVN ###
+.mvn/wrapper
+mvnw
+mvnw.cmd

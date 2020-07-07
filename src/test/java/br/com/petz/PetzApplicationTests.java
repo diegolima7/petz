@@ -1,10 +1,10 @@
-package br.com.testejava.testeusuarioservices;
+package br.com.petz;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TesteUsuarioServicesApplicationTests {
+class PetzApplicationTests {
 
 	@Test
 	void contextLoads() {
