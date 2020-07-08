@@ -1,38 +1,29 @@
 package br.com.petz.dto;
 
 import javax.validation.constraints.NotEmpty;
-
 import br.com.petz.enums.SexoPet;
 import br.com.petz.enums.TipoPet;
 import io.swagger.annotations.ApiModelProperty;
 
 public class PetDTO {
 
-	private static final long serialVersionUID = 1L;
-
-	@ApiModelProperty(hidden=true)
-	private ClienteDTO cliente;
 	private String nome;
-	private TipoPet tipoPet;
-	private SexoPet sexoAnimal;
+	private TipoPet tipo;
+	private SexoPet sexo;
+	@ApiModelProperty(hidden = true)
+	private int clienteId;
 
 	public PetDTO() {
 	}
 
-	public PetDTO(String nome, TipoPet tipoPet, SexoPet sexo) {
+	public PetDTO(String nome, TipoPet tipo, SexoPet sexo, int clienteId) {
 		super();
 		this.nome = nome;
-		this.tipoPet = tipoPet;
-		this.sexoAnimal = sexo;
+		this.tipo = tipo;
+		this.sexo = sexo;
+		this.clienteId = clienteId;
 	}
 
-	public ClienteDTO getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(ClienteDTO cliente) {
-		this.cliente = cliente;
-	}
 
 	@NotEmpty(message = "Nome é Obrigatório")
 	public String getNome() {
@@ -43,22 +34,28 @@ public class PetDTO {
 		this.nome = nome;
 	}
 
-	@NotEmpty(message = "Tipo do Pet é Obrigatório")
-	public TipoPet getTipoPet() {
-		return tipoPet;
+	public TipoPet getTipo() {
+		return tipo;
 	}
 
-	public void setTipoPet(TipoPet tipoPet) {
-		this.tipoPet = tipoPet;
+	public void setTipo(TipoPet tipo) {
+		this.tipo = tipo;
 	}
 
-	@NotEmpty(message = "Sexo do animal é Obrigatório")
-	public SexoPet getSexoAnimal() {
-		return sexoAnimal;
+	public SexoPet getSexo() {
+		return sexo;
 	}
 
-	public void setSexoAnimal(SexoPet sexoAnimal) {
-		this.sexoAnimal = sexoAnimal;
+	public void setSexo(SexoPet sexo) {
+		this.sexo = sexo;
+	}
+
+	public int getClienteId() {
+		return clienteId;
+	}
+
+	public void setClienteId(int clienteId) {
+		this.clienteId = clienteId;
 	}
 
 }

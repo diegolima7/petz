@@ -31,21 +31,29 @@ public class PetController {
 	@Autowired
 	private PetService service;
 
-	@PostMapping("/cadastrar")
-	public ResponseEntity<Response<PetBean>> cadastrarPet(@Valid @RequestBody PetBean usuario,
-			BindingResult result) {
+	@PostMapping("/cadastrar/{idCliente}")
+	public ResponseEntity<Response<PetBean>> cadastrarPet(@Valid @RequestBody PetDTO pet,
+			BindingResult result, @PathVariable(name = "idCliente") int idCliente) {
 		if (result.hasErrors()) {
 			List<String> erros = new ArrayList<String>();
 			result.getAllErrors().forEach(erro -> erros.add(erro.getDefaultMessage()));
 			return ResponseEntity.badRequest().body(new Response<PetBean>(erros));
 		}
-		return ResponseEntity.ok(new Response<PetBean>(this.service.cadastrarPet(usuario)));
+
+		try {
+			return ResponseEntity.ok(new Response<PetBean>(this.service.cadastrarPet(pet, idCliente)));
+
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+			return ResponseEntity.notFound().build();
+		}
+
 	}
 
 	@PutMapping("/atualizar/{idPet}")
 	public ResponseEntity<PetBean> atualizaPet(@PathVariable(name = "idPet") int idPet,
 			@RequestBody PetDTO pet) throws NotFoundException {
-		return ResponseEntity.ok(this.service.atualizarPet(idPet, pet));
+		return ResponseEntity.ok(this.service.atualizarPet(idPet,pet));
 	}
 
 	@GetMapping("/buscar/{id}")

@@ -41,7 +41,7 @@ public class ClienteService {
 		}	
 	}
 
-	public ClienteBean buscaClientePorId(Integer id) throws NotFoundException {
+	public ClienteBean buscaClientePorId(int id) throws NotFoundException {
 		return this.clienteRepository.findById(id).orElseThrow(() -> new NotFoundException("Cliente não encontrado"));
 	}
 

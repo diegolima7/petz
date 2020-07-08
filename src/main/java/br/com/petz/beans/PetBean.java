@@ -4,40 +4,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import br.com.petz.enums.SexoPet;
 import br.com.petz.enums.TipoPet;
-import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @Table(name = "tb_pet")
 public class PetBean {
 
 	@Id
-	@ApiModelProperty(hidden = true)
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer idPet;
-	
-	@ManyToOne
-	@JoinColumn(name = "idCliente")
-	@ApiModelProperty(hidden = true)
-	private ClienteBean cliente;
-		
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int idPet;
 	private String nome;
-	private TipoPet tipoPet;
-	private SexoPet sexoAnimal;
+	private TipoPet tipo;
+	private SexoPet sexo;
+	private int clienteId;
 
-	public PetBean() {
+	public int getClienteId() {
+		return clienteId;
 	}
 
-	public PetBean(String nome, TipoPet tipoPet, SexoPet sexo) {
-		super();
-		this.nome = nome;
-		this.tipoPet = tipoPet;
-		this.sexoAnimal = sexo;
+	public void setClienteId(int clienteId) {
+		this.clienteId = clienteId;
 	}
 
 	public Integer getIdPet() {
@@ -48,14 +36,6 @@ public class PetBean {
 		this.idPet = idPet;
 	}
 
-	public ClienteBean getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(ClienteBean cliente) {
-		this.cliente = cliente;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -64,24 +44,20 @@ public class PetBean {
 		this.nome = nome;
 	}
 
-	public TipoPet getTipoPet() {
-		return tipoPet;
+	public TipoPet getTipo() {
+		return tipo;
 	}
 
-	public void setTipoPet(TipoPet tipoPet) {
-		this.tipoPet = tipoPet;
+	public void setTipo(TipoPet tipo) {
+		this.tipo = tipo;
 	}
 
-	public SexoPet getSexoAnimal() {
-		return sexoAnimal;
+	public SexoPet getSexo() {
+		return sexo;
 	}
 
-	public void setSexoAnimal(SexoPet sexoAnimal) {
-		this.sexoAnimal = sexoAnimal;
+	public void setSexo(SexoPet sexo) {
+		this.sexo = sexo;
 	}
 
-	public void setIdCliente(int id) {
-		this.cliente = new ClienteBean();
-		this.cliente.setIdCliente(id);
-	}
 }

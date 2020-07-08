@@ -11,7 +11,7 @@ import br.com.petz.beans.PetBean;
 @Repository
 public interface PetRepository extends JpaRepository<PetBean, Integer>{
 		
-	public PetBean findByCliente(Optional<ClienteBean> optional);
+	//public PetBean findByCliente(Optional<ClienteBean> optional);
 	
 
 }

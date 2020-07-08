@@ -2,7 +2,7 @@ package br.com.petz.enums;
 
 public enum SexoCliente {
 
-	Masculino("M"), Feminino("F");
+	Masculino("Masculino"), Feminino("Feminino");
 
 	private String descricao;
 

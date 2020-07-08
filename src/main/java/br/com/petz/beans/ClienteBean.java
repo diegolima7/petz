@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -29,7 +30,7 @@ public class ClienteBean implements Serializable{
 	private String telefone;
 	private SexoCliente sexo;
 	private String endereco;
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "clienteId")
 	private List<PetBean> pets; 
 
 	public int getIdCliente() {

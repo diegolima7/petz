@@ -1,14 +1,11 @@
 package br.com.petz.services;
 
-import java.util.List;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.petz.beans.PetBean;
 import br.com.petz.dto.PetDTO;
-import br.com.petz.repositories.ClienteRepository;
 import br.com.petz.repositories.PetRepository;
 import javassist.NotFoundException;
 
@@ -18,19 +15,20 @@ public class PetService {
 	@Autowired
 	private PetRepository petRepository;
 	
+	@Autowired
+	private ClienteService clienteService;
+	
 	private ModelMapper model = new ModelMapper();
 
-	public PetBean cadastrarPet(PetBean pet) {
+	public PetBean cadastrarPet(PetDTO dto, int idCliente) throws NotFoundException{
+		PetBean pet = model.map(dto, PetBean.class);
+		this.clienteService.buscaClientePorId(idCliente);		
+		pet.setClienteId(idCliente);
 		return this.petRepository.save(pet);
 	}
 
-	public PetBean atualizarPet(int id, PetDTO dto) throws NotFoundException {
-
-		PetBean petCliente = this.buscaPetPorId(id);
-
+	public PetBean atualizarPet(int idPet, PetDTO dto) throws NotFoundException {
 		PetBean pet = model.map(dto, PetBean.class);
-		pet.setCliente(petCliente.getCliente());
-		pet.setIdPet(id);
 		return this.petRepository.save(pet);
 	}
 
@@ -42,10 +40,5 @@ public class PetService {
 		return this.petRepository.findById(id).orElseThrow(() -> new NotFoundException("Pet não encontrado"));
 	}
 	
-//	public PetBean buscarPetsPorCliente(int idCliente) {
-//		
-//		return petRepository.findByCliente(clienteRepository.findById(idCliente));
-//				
-//	}
 
 }
