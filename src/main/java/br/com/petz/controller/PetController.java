@@ -2,7 +2,6 @@ package br.com.petz.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -67,7 +66,7 @@ public class PetController {
 	}
 
 	@DeleteMapping("/remover/{id}")
-	public ResponseEntity<?> removerUsuario(@PathVariable(name = "id") int id) {
+	public ResponseEntity<?> removerPet(@PathVariable(name = "id") int id) {
 		this.service.removerPet(id);
 		return ResponseEntity.noContent().build();
 	}

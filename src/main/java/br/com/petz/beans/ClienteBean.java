@@ -7,13 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 
 import br.com.petz.enums.SexoCliente;
-import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @Table(name="tb_cliente")

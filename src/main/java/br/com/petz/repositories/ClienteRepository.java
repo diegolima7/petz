@@ -8,5 +8,4 @@ import br.com.petz.beans.ClienteBean;
 @Repository
 public interface ClienteRepository extends JpaRepository<ClienteBean, Integer> {
 
-
 }

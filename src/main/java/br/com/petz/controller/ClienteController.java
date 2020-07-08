@@ -2,7 +2,6 @@ package br.com.petz.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import br.com.petz.beans.ClienteBean;
 import br.com.petz.dto.ClienteDTO;
@@ -62,7 +60,7 @@ public class ClienteController {
 	}
 
 	@DeleteMapping("/remover/{id}")
-	public ResponseEntity<?> removerUsuario(@PathVariable(name = "id") int id) {
+	public ResponseEntity<?> removerCliente(@PathVariable(name = "id") int id) {
 		try {
 			this.service.removerCliente(id);
 		} catch (NotFoundException e) {
